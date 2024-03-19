@@ -5,11 +5,11 @@ Hello! I'm Patrick, a detail-oriented Data Analyst with over six years of experi
 📊 Skills and Technologies
 
 Programming Languages: Python, SQL, R
-Data Visualization and BI Tools: Tableau, Microsoft BI, Google Slides
+Data Visualization and BI Tools: Tableau, Microsoft BI, Google Slides, Microsoft Visio
 
-Machine Learning & AI: Machine Learning, Computer Vision, LLM Applications, LangChain, Retrieval-Augmented Generation
+Machine Learning & AI: Machine Learning, Computer Vision, LLM Integrations, LangChain, Retrieval-Augmented Generation
 
-Data Management: MongoDB, Google Cloud Platform, Hadoop, PySpark
+Data Management: SQL, MongoDB, Google Cloud Platform, Amazon AWS, Hadoop, PySpark
 
 Statistical & Analytical Tools: Statistical Modeling, Time Series Analysis, Linear Programming (AMPL), Alteryx
 
