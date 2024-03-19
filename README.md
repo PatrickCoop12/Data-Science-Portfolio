@@ -1,1 +1,1 @@
-# Project-Portfolio
+Hello! I'm Patrick, a detail-oriented Data Analyst with over six years of expertise in data science, machine learning, and generative AI. With a strong foundation in statistical modeling, AI-based application development, and data-driven strategic decision-making, I'm passionate about extracting valuable insights from complex datasets and leveraging them to inform business strategies and enhance operational efficiency.
