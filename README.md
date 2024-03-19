@@ -16,4 +16,5 @@ Statistical & Analytical Tools: Statistical Modeling, Time Series Analysis, Line
 🎓 Education
 
 M.Sc. in Business Analytics, Saint Mary’s College of California, Dec 2023
+
 B.A. in Sociology, California State University - Northridge, May 2017
