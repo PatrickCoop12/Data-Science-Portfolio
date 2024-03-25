@@ -1,6 +1,6 @@
 🔍 About Me
 
-Hello! I'm Patrick, a detail-oriented Data Analyst with over six years of experience in industry. I am specialized in the area of data science, and have significant experience around predictive analytics, machine learning, and generative AI. With a strong foundation in statistical modeling, AI-based application development, and data-driven strategic decision-making, I'm passionate about extracting valuable insights from complex datasets and leveraging them to inform business strategies and enhance operational efficiency.
+Hello! My name is Patrick, I am detail-oriented Data Analyst with over six years of experience in industry. I specialize in the area of data science, and have significant experience around predictive analytics, machine learning, and generative AI. With a strong foundation in statistical modeling, AI-based application development, and data-driven strategic decision-making, I'm passionate about extracting valuable insights from complex datasets and leveraging them to inform business strategies and enhance operational efficiency.
 
 📊 Skills and Technologies
 
