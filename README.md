@@ -4,7 +4,8 @@ Hello! My name is Patrick, I am Data Analyst with over six years of experience i
 
 📊 Skills and Technologies
 
-Programming Languages: Python, SQL, R
+Programming Languages: Python, R, SQL, AMPL
+
 Data Visualization and BI Tools: Tableau, Microsoft BI, Google Slides, Microsoft Visio
 
 Machine Learning & AI: Machine Learning, Computer Vision, LLM Integrations, LangChain, Retrieval-Augmented Generation
