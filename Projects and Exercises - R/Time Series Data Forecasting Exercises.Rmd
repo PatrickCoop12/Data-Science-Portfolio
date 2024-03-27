@@ -1,0 +1,121 @@
+---
+title: "Time Series Analysis and Forecasting Exercises"
+author: "Patrick Cooper"
+date: "2023-12-13"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r}
+library(readxl)
+library(fpp2)
+library(fpp3)
+library(fable)
+library(fabletools)
+library(ggplot2)
+library(forecast)
+library(smooth)
+library(zoo)
+library(urca)
+library(tseries)
+library(stats)
+library(timeDate)
+library(lmtest)
+library(fracdiff)
+library(generics)
+library(magrittr)
+library(nnet)
+library(parallel)
+```
+### Public affairs interest dataset
+
+
+### (k-1) Dummy Variables are needed to create a regression equation/model using qualitative variables. Dummy Variables needed = k-1 = 3-1 = 2. 
+
+### Coding Scheme:
+###     CBS   NBC
+### ABC   0     0
+### CBS   1     0
+### NBC   0     1
+
+
+### Interest in Public Affairs = 80.5419 - 1.1327(TV Viewing) + 0.2857(Reading) + 7.7268(CBS) + 0.5337(NBC)
+###         88% total proportion of total variation in the interest in public affairs that can be explained by TV viewing,                newspaper/magazine reading, and most frequently watched network
+
+### Looking at the coefficients in our output, we can assess that the expected value of interest in public affairs (y-intercept) will be 80.5419 if a person does not watch tv, does not indulge in reading of newspapers/magazines, nor is a frequent viewer of ABC, CBS, or NBC TV networks. When looking at TV viewing, we can expect the value of interest in public affairs to decrease by 1.1327 for every hour of TV watched per week. Looking at newspaper/magazine readership, we can expect interest in public affairs to increase by .2857 for every minute spend reading per day. When looking at the most frequently viewed TV network, we can expect interest in public affairs to go up by 7.7268 if CBS is the most frequently watched TV network. we can expect interest in public affairs to go up by .5337 if NBC is the most frequently watched TV network.
+
+
+### Given that the p-values for each network in our regression model is greater than .05, we can deduce that most frequently watch network does not have any significant effect on interest in public affairs.
+
+```{r}
+pub_aff_interest <- read_excel("Final.xlsx", sheet = "Q1-Viewing")
+pub_aff_interest$Network <- factor(pub_aff_interest$Network, levels = c('ABC','CBS','NBC'))
+M1 <- lm(Interest~`TV Viewing`+Reading+Network,pub_aff_interest)
+summary(M1)
+```
+### Interest in Public Affairs = 80.5419 - 1.1327(TV Viewing) + 0.2857(Reading) + 0.5337(NBC)
+
+## Point estimator for the interest in public affairs of an individual viewer who views TV 45 hours/week, reads magazine/newspaper 25 minutes/day and watches NBC network most frequently:
+###         Interest in Public Affairs = 80.5419 - 1.1327(TV Viewing) + 0.2857(Reading) + 0.5337(NBC)
+###         Interest in Public Affairs = 80.5419 - 1.1327(45) + 0.2857(25) + 0.5337(1)
+###         Interest in Public Affairs = 37.2466
+
+```{r}
+interest_pub <- 80.5419 + -1.1327*45 + 0.2857*25 + 0.5337*1
+interest_pub
+```
+
+## Australian retail sales data
+
+```{r}
+retaildata <- read_excel("Final.xlsx", sheet = "Q2-Retail")
+head(retaildata)
+```
+
+
+```{r}
+myts <- ts(retaildata[,"A3349884J"],
+  frequency=12, start=c(1982,4))
+```
+
+### A random series was selected from the dataset for analysis. The series selected was for Queensland ;  Clothing, footwear and personal accessory retailing. Looking at the autoplot chart, we can determine that the overall trend of the series is positive. The seasonality we see is an uptick in sales between November and December. Sales drop off between January and February.
+
+```{r}
+autoplot(myts) 
+ggseasonplot(myts)
+ggsubseriesplot(myts)
+gglagplot(myts)
+ggAcf(myts)
+```
+### In order to simplify my model, I would use the logarithm box-cox transformation. By doing this, we would reduce the variation in our series displayed due to the seasonality observed in our data.
+
+## Split the data into two parts.
+
+```{r}
+myts.train <- window(myts, end=c(2010,12))
+myts.test <- window(myts, start=2011)
+```
+
+##: Checking that my data has been split appropriately by producing the following plot overlaying test and training data.
+
+```{r}
+autoplot(myts) +
+  autolayer(myts.train, series="Training") +
+  autolayer(myts.test, series="Test")
+```
+
+## Calculating forecasts using snaive forecast method applied to myts.train.
+
+```{r}
+fc <- snaive(myts.train)
+autoplot(fc)
+```
+
+## Compare the accuracy of your forecasts against the actual values stored in myts.test. 
+
+```{r}
+accuracy(fc,myts.test)
+```
