@@ -1,0 +1,61 @@
+---
+title: "Project 2"
+author: "Patrick Cooper"
+date: "2023-06-09"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## R Markdown
+
+This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
+
+When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
+
+```{r cars}
+summary(cars)
+```
+
+## Including Plots
+
+You can also embed plots, for example:
+
+```{r pressure, echo=FALSE}
+plot(pressure)
+```
+
+Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
+
+
+```{r}
+install.packages("readxl")
+```
+
+
+### In this exercise I had previously prepared monthly Fama French 49-Industry Portfolios data. The Fama-French 49-industries portfolios are compiled by organizing companies on the NYSE, AMEX, and NASDAQ into groupings based on the industry they occupy. Returns for each company in each group are then calculated and averaged as a indicator of industry performance overall. The data is dates back to July 1926 and is tracked both in daily and monthly intervals. 
+
+### My objective was to first identify the last 7 recessions in the US. After careful research i was able to narrow down each recessionary period, and the dates it spanned. Using this information I filtered the industry data gathered by the months/years of each recession identified along with the 12 months prior to the recession and the 12 months following. I then created a column to note the period (prior, during, and post recession) each reported monthly return fell into to create a linear regression model to help determine how industries performed with respect to returns in the 12 months leading up to a recession, during a recession, and in the 12 months that followed each recession. 
+
+### This exercise wasn't labor intensive outside of the data preparation, however, this information delivered in the results can be very helpful to economists and investors. A year or two ago individuals were bracing for a recession, and it can be helpful and calming to understand which industries hold water historically and at what time-period around a recession may it be wise to enter or exit certain investment positions. 
+
+### The below is an example run using the Agricultural industries, we see that the results weren't significant and returns performance in the Agricultural industry had no significant linear relationship with any of the time periods. Though not significant we do see a slightly inverse relationship with the during period indication returns drop during a recession, and a slightly positive relationship with both prior and post recession periods. However, because neither of these results are significant, we would continue investigating other industries for potentially significant results.
+
+```{r}
+library(readxl)
+industries <- read_excel("Project 2.xlsx", sheet = "Industries", col_names = TRUE)
+industries
+```
+
+
+```{r}
+industries$Period <- factor(industries$Period, levels = c("During","Prior", "Post"))
+```
+
+```{r}
+lm <- lm(Agric ~ Period, data = industries)
+summary(lm)
+```
+
